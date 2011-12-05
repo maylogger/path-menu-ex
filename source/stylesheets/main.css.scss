@@ -92,6 +92,11 @@ h1 {
   @include transform( rotate(-45deg) );
 }
 
+body .path-on .plus,
+body .path-off .plus{
+  pointer-events: none;
+}
+
 @for $i from 1 through $items {
 
   $rad: ( $angle * ($i - 1) + $start-angle ) * ( pi() / 180 );
