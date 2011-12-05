@@ -29,13 +29,11 @@ body {
   background: $bg;
   color: $text-color;
   padding: 5px 10px;
-  line-height: 1.1;
-  width: 320px;
+  line-height: 1.5;
 }
 
 a {
-  text-decoration: none;
-  @include link-colors(white);
+  @include link-colors($text-color);
 }
 
 .path {
@@ -76,6 +74,10 @@ a {
 h1 {
   @include adjust-font-size-to(24px);
   font-weight: bold;
+}
+
+.fb-like {
+  margin-top: 15px;
 }
 
 .plus {
