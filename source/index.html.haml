@@ -1,0 +1,16 @@
+- content_for :head do
+  %title Path menu extreme
+
+- content_for :header do
+  = partial "header"
+
+- 1.times do |num|
+  %div.path
+    .plus
+      .button
+        %span.span1
+        %span.span2
+    %ul
+      - 30.times do |item|
+        %li{ :class => "item item" + (item + 1).to_s }
+          .button= item + 1

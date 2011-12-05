@@ -1,0 +1,9 @@
+  .item#{$i} {
+    $rad: ( $angle * ($i - 1) + $start-angle ) * ( pi() / 180 );
+    $x: round(($menu-radius) * sin($rad));
+    $y: round(($menu-radius) * cos($rad));
+    $xm: round($x * 1.15);
+    $ym: round($y * 1.15);
+    left: $x - $item-size / 2;
+    bottom: $y - $item-size / 2;
+  }

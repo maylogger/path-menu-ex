@@ -1,0 +1,151 @@
+@import "compass";
+@include global-reset;
+
+@import "mixin";
+
+$bg: #eeeeef;
+$text-color: #444;
+
+$plus-size: 42px;
+$plus-border: 3px;
+$plus-color: #d52e17;
+
+$items: 30; // item 數量
+$item-size: 32px;
+$item-border: 3px;
+$item-color: #44403d;
+
+$arc: 90; // 總共角度
+$angle: $arc / ($items - 1); // 單一item角度
+$start-angle: 0;
+
+$menu-radius: 650px; // 半徑
+
+$speed: .6s;
+$delay: 20;
+
+body {
+  font-family: "helvetica neue", sans-serif;
+  background: $bg;
+  color: $text-color;
+  padding: 5px 10px;
+  line-height: 1.1;
+  width: 320px;
+}
+
+a {
+  text-decoration: none;
+  @include link-colors(white);
+}
+
+.path {
+  width: $menu-radius;
+  height: $menu-radius;
+  position: absolute;
+  bottom: 35px;
+  left: 35px;
+}
+
+.plus {
+  z-index: 1000;
+  @include buttom($plus-size, $plus-border, $plus-color);
+  @include transition(.3s);
+  span {
+    $cross: 6px;
+    $corss-width: $plus-size - $cross - 14px;
+    position: absolute;
+    display: block;
+    background: white;
+    width: $corss-width;
+    height: $cross;
+    top: 50%;
+    left: 50%;
+    margin-left: - ($corss-width) / 2;
+    margin-top: - ($cross) / 2;
+    @include border-radius(2px);
+  }
+  .span2 {
+    @include transform(rotate(90deg));
+  }
+}
+
+.item {
+  @include buttom($item-size, $item-border, $item-color)
+}
+
+h1 {
+  @include adjust-font-size-to(24px);
+  font-weight: bold;
+}
+
+.plus {
+  @include transition(.3s);
+}
+.plus-on {
+  @include transform( rotate(-45deg) );
+}
+
+@for $i from 1 through $items {
+
+  $rad: ( $angle * ($i - 1) + $start-angle ) * ( pi() / 180 );
+  $x: round(($menu-radius) * sin($rad));
+  $y: - round(($menu-radius) * cos($rad));
+  $xmax: round($x * 1.1);
+  $ymax: round($y * 1.1);
+  $xmin: round($x * .98);
+  $ymin: round($y * .98);
+
+  .path-on .item#{$i} {
+    -webkit-animation-name: "appear-#{$i}";
+    -webkit-animation-duration: $speed;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-delay: ($delay * ($i - 1))+ms;
+  }
+
+  .path-on-end .item#{$i} {
+    left: $x - $item-size/2;
+    bottom: -$y - $item-size/2;
+  }
+
+  .path-off .item#{$i} {
+    -webkit-animation-name: "disappear-#{$i}";
+    -webkit-animation-duration: $speed * 1.2;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-delay: ($delay * ($items - $i - 1))+ms;
+  }
+
+  @-webkit-keyframes "appear-#{$i}" { 
+      0% {
+        -webkit-transform:translate3d(0, 0, 0) rotateZ(180deg);
+        -webkit-animation-timing-function:cubic-bezier( .18,.5,.65,.99 );
+      }
+      60% {
+        -webkit-transform:translate3d($xmax, $ymax, 0) rotateZ(90deg);
+        -webkit-animation-timing-function:cubic-bezier(.45,.97,.51,.78);
+      }
+      80% {
+        -webkit-transform:translate3d($xmin, $ymin, 0) rotateZ(0deg);
+      }
+      100% {
+        -webkit-transform:translate3d($x, $y, 0) rotateZ(0deg);
+      }
+  }          
+  
+  @-webkit-keyframes "disappear-#{$i}" { 
+      0% {
+        -webkit-transform:translate3d( 0, 0, 0 ) rotateZ(0deg);
+        -webkit-animation-timing-function:cubic-bezier(1,.6,.57,.75);
+      }
+      50% {
+        -webkit-transform:translate3d( $xmax - $x, $ymax - $y, 0 ) rotateZ(360deg);
+        -webkit-animation-timing-function:cubic-bezier(.45,.97,.51,.78);
+      }
+      100% {
+       -webkit-transform:translate3d( -$x, -$y, 0 ) rotateZ(720deg);
+      }
+  }
+
+
+}
