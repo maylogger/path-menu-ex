@@ -21,7 +21,7 @@ $start-angle: 0;
 
 $menu-radius: 650px; // 半徑
 
-$speed: .6s;
+$speed: .9s;
 $delay: 20;
 
 body {
@@ -137,11 +137,11 @@ body .path-off .plus{
         -webkit-transform:translate3d(0, 0, 0) rotateZ(180deg);
         -webkit-animation-timing-function:cubic-bezier( .18,.5,.65,.99 );
       }
-      60% {
+      50% {
         -webkit-transform:translate3d($xmax, $ymax, 0) rotateZ(90deg);
         -webkit-animation-timing-function:cubic-bezier(.45,.97,.51,.78);
       }
-      80% {
+      75% {
         -webkit-transform:translate3d($xmin, $ymin, 0) rotateZ(0deg);
       }
       100% {
