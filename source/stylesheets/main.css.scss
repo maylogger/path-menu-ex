@@ -47,7 +47,7 @@ a {
 
 .plus {
   z-index: 1000;
-  @include buttom($plus-size, $plus-border, $plus-color);
+  @include item($plus-size, $plus-border, $plus-color);
   @include transition(.3s);
   span {
     $cross: 6px;
@@ -70,7 +70,7 @@ a {
 
 .item {
   pointer-events: auto;
-  @include buttom($item-size, $item-border, $item-color);
+  @include item($item-size, $item-border, $item-color);
   .hide {
     display: none;
   }
