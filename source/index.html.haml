@@ -11,6 +11,7 @@
         %span.span1
         %span.span2
     %ul
-      - 30.times do |item|
+      - 20.times do |item|
         %li{ :class => "item item" + (item + 1).to_s }
-          .button= item + 1
+          .button{ :class => "icon-item" + (item + 1).to_s }
+            .hide= item + 1

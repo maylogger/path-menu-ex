@@ -10,7 +10,7 @@ $plus-size: 42px;
 $plus-border: 3px;
 $plus-color: #d52e17;
 
-$items: 30; // item 數量
+$items: 20; // item 數量
 $item-size: 32px;
 $item-border: 3px;
 $item-color: #44403d;
@@ -19,7 +19,7 @@ $arc: 90; // 總共角度
 $angle: $arc / ($items - 1); // 單一item角度
 $start-angle: 0;
 
-$menu-radius: 650px; // 半徑
+$menu-radius: 500px; // 半徑
 
 $speed: .9s;
 $delay: 20;
@@ -69,7 +69,11 @@ a {
 }
 
 .item {
-  @include buttom($item-size, $item-border, $item-color)
+  pointer-events: auto;
+  @include buttom($item-size, $item-border, $item-color);
+  .hide {
+    display: none;
+  }
 }
 
 h1 {
@@ -100,6 +104,9 @@ body .path-on .plus,
 body .path-off .plus{
   pointer-events: none;
 }
+
+@import "icon/*.png";
+@include all-icon-sprites;
 
 @for $i from 1 through $items {
 
@@ -156,7 +163,7 @@ body .path-off .plus{
       }
       50% {
         -webkit-transform:translate3d( $xmax - $x, $ymax - $y, 0 ) rotateZ(360deg);
-        -webkit-animation-timing-function:cubic-bezier(.45,.97,.51,.78);
+        -webkit-animation-timing-function: liner;
       }
       100% {
        -webkit-transform:translate3d( -$x, -$y, 0 ) rotateZ(720deg);
